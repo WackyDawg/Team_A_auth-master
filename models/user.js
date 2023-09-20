@@ -4,7 +4,7 @@ const sequelize = new Sequelize("hngx", "root", "", {
   dialect: "mysql",
 });
 
-const User = sequelize.define('User', {
+const User = sequelize.define("User", {
   googleId: { type: Sequelize.STRING, unique: true },
   twitterId: { type: Sequelize.STRING, unique: true }, // Add this line
   name: Sequelize.STRING,
@@ -16,10 +16,10 @@ const User = sequelize.define('User', {
 
 User.sync()
   .then(() => {
-    console.log('User model synced successfully');
+    console.log("User model synced successfully");
   })
   .catch((error) => {
-    console.error('Error syncing User model:', error);
+    console.error("Error syncing User model:", error);
   });
 
 module.exports = {
