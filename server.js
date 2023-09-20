@@ -46,14 +46,14 @@ app.get(
   }
 );
 
-//app.get(
-// '/auth/twitter',
-// passport.authenticate('twitter', {
-//   scope: ['tweet.read', 'users.read', 'offline.access'],
-// })
-//);
+app.get(
+ '/auth/twitter',
+ passport.authenticate('twitter', {
+   scope: ['tweet.read', 'users.read', 'offline.access'],
+ })
+);
 
-app.get("/auth/twitter", passport.authenticate("twitter"));
+//app.get("/auth/twitter", passport.authenticate("twitter"));
 
 app.get(
   "/auth/twitter/callback",
