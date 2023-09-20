@@ -20,7 +20,7 @@ app.use(passport.session());
 app.get("/success", (req, res) => {
   if (req.isAuthenticated()) {
     const user = req.user;
-    //console.log(user);
+    console.log(user);
     res.render("success", { user });
   } else {
     res.redirect("/login");

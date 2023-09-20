@@ -51,17 +51,32 @@ passport.use(
 passport.use(
   new TwitterStrategy(
     {
-      clientType: 'confidential', //depends on your Twitter app settings, valid values are `confidential` or `public`
+      clientType: 'confidential',
       clientID: process.env.TWITTER_CLIENT_ID,
       clientSecret: process.env.TWITTER_CLIENT_SECRET,
       callbackURL: `${process.env.BASE_URL}/auth/twitter/callback`,
     },
     function (accessToken, refreshToken, profile, done) {
-      User.findOrCreate({ twitterId: profile.id }, function (err, user) {
-        return done(err, user);
-      });
+      User.findOrCreate({
+        where: { twitterId: profile.id },
+        defaults: {
+          name: profile.displayName,
+          email: profile.emails && profile.emails.length > 0 ? profile.emails[0].value : null,
+          avatar: profile.photos && profile.photos.length > 0 ? profile.photos[0].value : null,
+          refreshToken: refreshToken,
+          accessToken: accessToken,
+        },
+      })
+        .then(([user, created]) => {
+          return done(null, user);
+        })
+        .catch((error) => {
+          return done(error, null);
+        });
     }
   )
 );
+
+
 
 module.exports = passport;
