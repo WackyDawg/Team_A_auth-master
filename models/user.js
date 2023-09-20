@@ -6,6 +6,7 @@ const sequelize = new Sequelize('hngx', 'root', '', {
 
 const User = sequelize.define('User', {
   googleId: { type: Sequelize.STRING, unique: true },
+  twitterId: { type: Sequelize.STRING, unique: true }, // Add this line
   name: Sequelize.STRING,
   email: Sequelize.STRING,
   avatar: Sequelize.STRING,
