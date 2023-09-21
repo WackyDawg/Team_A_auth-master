@@ -19,7 +19,6 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-// Function to render the "success" page
 const renderSuccessPage = (req, res) => {
   if (req.isAuthenticated()) {
     const user = req.user;
@@ -33,7 +32,6 @@ app.get("/", isLoggedIn, function (req, res) {
   res.render("login");
 });
 
-// Use the renderSuccessPage function in the "/success" route
 app.get("/success",  renderSuccessPage);
 
 app.get("/error", (req, res) => res.send("Error logging in"));
